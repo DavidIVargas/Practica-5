@@ -4,17 +4,24 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.usuario;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorUsuario;
+import ec.edu.ups.practica_5_mgn.modelo.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class EliminarUsuario extends javax.swing.JInternalFrame {
 
+    private ControladorUsuario controladorUsuario;
+
     /**
      * Creates new form EliminarUsuario
      */
-    public EliminarUsuario() {
+    public EliminarUsuario(ControladorUsuario controladorUsuario) {
         initComponents();
+        this.controladorUsuario = controladorUsuario;
     }
 
     /**
@@ -38,8 +45,13 @@ public class EliminarUsuario extends javax.swing.JInternalFrame {
         jCorreo = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actualizar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Eliminar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 14))); // NOI18N
 
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNombre.setToolTipText("Ingrese el nombre del Usuario");
@@ -157,21 +169,63 @@ public class EliminarUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
-        //Buscar por id al usuario y en txtNombre txtCorreo genera los datos de el usuario de acuerdo a su id
+        String idBuscado = txtId.getText();
+        if (!idBuscado.isEmpty()) {
+            Usuario usuarioEncontrado = controladorUsuario.buscarUsuarioPorId(idBuscado);
+            if (usuarioEncontrado != null) {
+                // Mostrar los datos del usuario encontrado en los campos correspondientes
+                txtNombre.setText(usuarioEncontrado.getNombre());
+                txtCorreo.setText(usuarioEncontrado.getCorreo());
+                // También puedes mostrar la identificación si lo deseas
+                txtId.setText(usuarioEncontrado.getIdentificacion());
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                limpiarCampos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarUsuarioActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        //Calncela la accion y elimina los datos ingresados, genera un campo de texto que pregunte si esta seguro de cancelar la accion
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de cancelar la acción?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Realizar alguna acción adicional si se confirma la cancelación
+            this.setVisible(false);
+            this.limpiarCampos();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        //Elimina los datos ingresados, genera un mensaje que pregunte si esta seguro de eliminar los datos
+        this.limpiarCampos();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Preguntara si esta seguro de elimar al usuario mediante un mensaje, si la respuesta es "si" este la eliminara al usuario de todos lados
-    }//GEN-LAST:event_btnEliminarActionPerformed
+        String idUsuario = txtId.getText();
 
+        if (!idUsuario.isEmpty()) {
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este usuario?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                // Invocar el método eliminarUsuario del controlador
+                boolean eliminado = controladorUsuario.eliminarUsuario(idUsuario);
+
+                if (eliminado) {
+                    JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente.", "Eliminación exitosa", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+    public void limpiarCampos() {
+        this.txtCorreo.setText("");
+        this.txtId.setText("");
+        this.txtNombre.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;

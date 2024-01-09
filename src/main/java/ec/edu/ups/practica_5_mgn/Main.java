@@ -4,17 +4,57 @@
  */
 package ec.edu.ups.practica_5_mgn;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorBiblioteca;
+import ec.edu.ups.practica_5_mgn.controlador.ControladorLibro;
+import ec.edu.ups.practica_5_mgn.controlador.ControladorPrestamo;
+import ec.edu.ups.practica_5_mgn.controlador.ControladorUsuario;
+import ec.edu.ups.practica_5_mgn.modelo.Biblioteca;
+import ec.edu.ups.practica_5_mgn.vista.libro.ActualizarLibro;
+import ec.edu.ups.practica_5_mgn.vista.libro.AgregarLibro;
+import ec.edu.ups.practica_5_mgn.vista.libro.BuscarLibro;
+import ec.edu.ups.practica_5_mgn.vista.libro.EliminarLibro;
+import ec.edu.ups.practica_5_mgn.vista.usuario.ActualizarUsuario;
+import ec.edu.ups.practica_5_mgn.vista.usuario.AgregarUsuario;
+import ec.edu.ups.practica_5_mgn.vista.usuario.BuscarUsuario;
+import ec.edu.ups.practica_5_mgn.vista.usuario.EliminarUsuario;
+
 /**
  *
  * @author davidvargas
  */
 public class Main extends javax.swing.JFrame {
 
+    //Controladores
+    private ControladorBiblioteca controladorBiblioteca;
+    private ControladorLibro controladorLibro;
+    private ControladorPrestamo controladorPrestamo;
+    private ControladorUsuario controladorUsuario;
+    //Ventanas Usuario CRUD
+    private AgregarUsuario agregarUsuario;
+    private BuscarUsuario buscarUsuario;
+    private ActualizarUsuario actualizarUsuario;
+    private EliminarUsuario eliminarUsuario;
+    //Ventana Libro CRUD
+    private AgregarLibro agregarLibro;
+    private BuscarLibro buscarLibro;
+    private ActualizarLibro actualizarLibro;
+    private EliminarLibro eliminarLibro;
+
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        String nombreBiblioteca = "Nombre de la biblioteca";
+        String direccionBiblioteca = "Dirección de la biblioteca";
+        Biblioteca biblioteca = new Biblioteca(nombreBiblioteca, direccionBiblioteca);
+
+        controladorUsuario = new ControladorUsuario(biblioteca);
+        controladorBiblioteca = new ControladorBiblioteca(biblioteca);
+        controladorPrestamo = new ControladorPrestamo();
+        controladorLibro = new ControladorLibro(controladorUsuario);
+        AgregarUsuario agregarUsuarioFrame = new AgregarUsuario(controladorUsuario);
+        BuscarUsuario buscarUsuarioFrame = new BuscarUsuario(controladorUsuario);
     }
 
     /**
@@ -62,18 +102,38 @@ public class Main extends javax.swing.JFrame {
 
         mniAgregar_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Agregar.png"))); // NOI18N
         mniAgregar_Usuario.setText("Agregar Usuario");
+        mniAgregar_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniAgregar_UsuarioActionPerformed(evt);
+            }
+        });
         mnUsuario.add(mniAgregar_Usuario);
 
         mniBuscar_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
         mniBuscar_Usuario.setText("Buscar Usuario");
+        mniBuscar_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniBuscar_UsuarioActionPerformed(evt);
+            }
+        });
         mnUsuario.add(mniBuscar_Usuario);
 
         mniActualizar_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         mniActualizar_Usuario.setText("Actualizar Usuario");
+        mniActualizar_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniActualizar_UsuarioActionPerformed(evt);
+            }
+        });
         mnUsuario.add(mniActualizar_Usuario);
 
         mniEliminar_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Eliminar.png"))); // NOI18N
         mniEliminar_Usuario.setText("Eliminar Usuario");
+        mniEliminar_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEliminar_UsuarioActionPerformed(evt);
+            }
+        });
         mnUsuario.add(mniEliminar_Usuario);
 
         jMenuBar1.add(mnUsuario);
@@ -83,6 +143,11 @@ public class Main extends javax.swing.JFrame {
 
         mniAgregar_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Agregar.png"))); // NOI18N
         mniAgregar_Libro.setText("Agregar Libro");
+        mniAgregar_Libro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniAgregar_LibroActionPerformed(evt);
+            }
+        });
         mnLibro.add(mniAgregar_Libro);
 
         mniBuscar_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
@@ -136,6 +201,45 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mniAgregar_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAgregar_UsuarioActionPerformed
+        if (agregarUsuario == null) {
+            agregarUsuario = new AgregarUsuario(controladorUsuario);
+            jPanel1.add(agregarUsuario);
+        }
+        agregarUsuario.setVisible(true);
+    }//GEN-LAST:event_mniAgregar_UsuarioActionPerformed
+
+    private void mniBuscar_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniBuscar_UsuarioActionPerformed
+        if (buscarUsuario == null) {
+            buscarUsuario = new BuscarUsuario(controladorUsuario);
+            jPanel1.add(buscarUsuario);
+        }
+        buscarUsuario.setVisible(true);
+    }//GEN-LAST:event_mniBuscar_UsuarioActionPerformed
+
+    private void mniActualizar_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniActualizar_UsuarioActionPerformed
+        if (actualizarUsuario == null) {
+            actualizarUsuario = new ActualizarUsuario(controladorUsuario);
+            jPanel1.add(actualizarUsuario);
+        }
+        actualizarUsuario.setVisible(true);
+    }//GEN-LAST:event_mniActualizar_UsuarioActionPerformed
+
+    private void mniEliminar_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEliminar_UsuarioActionPerformed
+        if (eliminarUsuario == null){
+            eliminarUsuario = new EliminarUsuario(controladorUsuario);
+            jPanel1.add(eliminarUsuario);
+        }
+        eliminarUsuario.setVisible(true);
+    }//GEN-LAST:event_mniEliminar_UsuarioActionPerformed
+
+    private void mniAgregar_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAgregar_LibroActionPerformed
+        if(agregarLibro == null){
+            agregarLibro = new AgregarLibro();
+        }
+        agregarLibro.setVisible(true);
+    }//GEN-LAST:event_mniAgregar_LibroActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,17 +4,28 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.usuario;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorUsuario;
+import ec.edu.ups.practica_5_mgn.modelo.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class BuscarUsuario extends javax.swing.JInternalFrame {
 
+    private ControladorUsuario controladorUsuario;
+
     /**
      * Creates new form BuscarUsuario
      */
-    public BuscarUsuario() {
+    public BuscarUsuario(ControladorUsuario controladorUsuario) {
         initComponents();
+        this.controladorUsuario = controladorUsuario;
+    }
+
+    public void setControladorUsuario(ControladorUsuario controladorUsuario) {
+        this.controladorUsuario = controladorUsuario;
     }
 
     /**
@@ -36,6 +47,11 @@ public class BuscarUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jID = new javax.swing.JLabel();
         jCorreo = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 14))); // NOI18N
@@ -145,18 +161,43 @@ public class BuscarUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
-        //Buscar por id al usuario y en txtNombre txtCorreo genera los datos de el usuario de acuerdo a su id
+        String idBuscado = txtId.getText();
+        if (!idBuscado.isEmpty()) {
+            Usuario usuarioEncontrado = controladorUsuario.buscarUsuarioPorId(idBuscado);
+            if (usuarioEncontrado != null) {
+                // Mostrar los datos del usuario encontrado en los campos correspondientes
+                txtNombre.setText(usuarioEncontrado.getNombre());
+                txtCorreo.setText(usuarioEncontrado.getCorreo());
+                // También puedes mostrar la identificación si lo deseas
+                txtId.setText(usuarioEncontrado.getIdentificacion());
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                limpiarCampos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarUsuarioActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        //Calncela la accion y elimina los datos ingresados, genera un campo de texto que pregunte si esta seguro de cancelar la accion
+        // Cancelar la acción y limpiar los datos ingresados
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de cancelar la acción?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Realizar alguna acción adicional si se confirma la cancelación
+            this.setVisible(false);
+            this.limpiarCampos();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        //Elimina los datos ingresados, genera un mensaje que pregunte si esta seguro de eliminar los datos
+        this.limpiarCampos();
     }//GEN-LAST:event_btnBorrarActionPerformed
+    public void limpiarCampos() {
+        this.txtCorreo.setText("");
+        this.txtId.setText("");
+        this.txtNombre.setText("");
 
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBuscarUsuario;

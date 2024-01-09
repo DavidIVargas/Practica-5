@@ -4,17 +4,24 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.usuario;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorUsuario;
+import ec.edu.ups.practica_5_mgn.modelo.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class AgregarUsuario extends javax.swing.JInternalFrame {
 
+    private ControladorUsuario controladorUsuario;
+
     /**
      * Creates new form AgregarUsuario
      */
-    public AgregarUsuario() {
+    public AgregarUsuario(ControladorUsuario controladorUsuario) {
         initComponents();
+        this.controladorUsuario = controladorUsuario;
     }
 
     /**
@@ -36,6 +43,28 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jID = new javax.swing.JLabel();
         jCorreo = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 14))); // NOI18N
@@ -134,7 +163,7 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        /*String nombre = txtNombre.getText();
+        String nombre = txtNombre.getText();
         String id = txtId.getText();
         String correo = txtCorreo.getText();
 
@@ -143,33 +172,38 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
         } else {
             Usuario nuevoUsuario = new Usuario(nombre, id, correo);
 
-            if (usuario_Controlador != null) {
-                usuario_Controlador.guardarUsuario(nuevoUsuario);
+            if (controladorUsuario != null) {
+                controladorUsuario.guardarUsuario(nuevoUsuario);
                 System.out.println("Usuario creado exitosamente: " + nuevoUsuario);
 
                 JOptionPane.showMessageDialog(this, "El usuario ha sido creado exitosamente.", "Usuario creado", JOptionPane.INFORMATION_MESSAGE);
+
+                // Limpiar campos si se desea
+                limpiarCampos();
             } else {
                 System.out.println("Error: El controlador de usuario no está disponible.");
             }
-
-            limpiarCampos();
         }
-*/
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*this.setVisible(false);
+        this.setVisible(false);
         this.limpiarCampos();
-        ((Principal) getTopLevelAncestor()).mostrarBotones(true);
-*/
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        /*this.limpiarCampos();
-        */
+        this.limpiarCampos();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        this.limpiarCampos();
+    }//GEN-LAST:event_formInternalFrameClosing
 
+    private void limpiarCampos() {
+        this.txtNombre.setText("");
+        this.txtCorreo.setText("");
+        this.txtId.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCancelar;

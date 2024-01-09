@@ -6,6 +6,7 @@ package ec.edu.ups.practica_5_mgn.dao;
 
 import ec.edu.ups.practica_5_mgn.idao.UsuarioIDAO;
 import ec.edu.ups.practica_5_mgn.modelo.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +14,12 @@ import java.util.List;
  * @author davidvargas
  */
 public class UsuarioDAO implements UsuarioIDAO {
-    private List<Usuario> listaUsuarios; // Suponiendo que esta lista se inicializa y gestiona los usuarios
+    private List<Usuario> listaUsuarios;
 
-    // Implementación de métodos de la interfaz UsuarioIDAO
+    public UsuarioDAO() {
+        this.listaUsuarios = new ArrayList<>();
+    }
+
     @Override
     public void agregarUsuario(Usuario usuario) {
         listaUsuarios.add(usuario);
@@ -23,19 +27,17 @@ public class UsuarioDAO implements UsuarioIDAO {
 
     @Override
     public Usuario obtenerUsuarioPorId(String id) {
-        // Iterar la lista para encontrar el usuario por su ID
         for (Usuario usuario : listaUsuarios) {
-            if (usuario.getIdentificacion().equals(id)) {
+            if (usuario.getIdentificacion().equalsIgnoreCase(id)) {
                 return usuario;
             }
         }
-        return null; // Si no se encuentra el usuario
+        return null;
     }
 
     @Override
     public void actualizarUsuario(Usuario usuario) {
         // Lógica para actualizar un usuario existente
-        // Puedes buscar el usuario por ID y actualizar sus atributos
     }
 
     @Override
@@ -45,6 +47,6 @@ public class UsuarioDAO implements UsuarioIDAO {
 
     @Override
     public List<Usuario> obtenerTodosLosUsuarios() {
-        return listaUsuarios; // Devuelve toda la lista de usuarios
+        return listaUsuarios;
     }
 }

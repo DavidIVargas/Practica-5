@@ -8,13 +8,12 @@ package ec.edu.ups.practica_5_mgn.vista.libro;
  *
  * @author davidvargas
  */
-public class AgregarLibro extends javax.swing.JInternalFrame {
-    
+public class Devolver extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form AgregarLibro
+     * Creates new form Devolver
      */
-    public AgregarLibro() {
+    public Devolver() {
         initComponents();
     }
 
@@ -29,14 +28,12 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         txtTitulo = new javax.swing.JTextField();
-        txtAutor = new javax.swing.JTextField();
-        txtAnio = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
+        btnDevolver = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -44,18 +41,14 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
         setResizable(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar Libro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Devolver Libro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 12))); // NOI18N
 
-        txtTitulo.setToolTipText("Agregue le Titulo del Libro");
+        txtTitulo.setToolTipText("Titulo del libro a devolver");
 
-        txtAutor.setToolTipText("Ingrese el nombre del Autor");
-
-        txtAnio.setToolTipText("Ingrese el año del libro");
-
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnDevolver.setText("Devolver");
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnDevolverActionPerformed(evt);
             }
         });
 
@@ -66,7 +59,7 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
             }
         });
 
-        btnBorrar.setText("Borrar");
+        btnBorrar.setText("Limpiar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -75,51 +68,46 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Titulo");
 
-        jLabel2.setText("Autor");
+        txtId.setToolTipText("Id del usuario que pidio el libro");
 
-        jLabel3.setText("Año");
+        jLabel2.setText("Identificacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTitulo)
-                    .addComponent(txtAutor)
-                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDevolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel1))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(btnAgregar))
-                .addGap(18, 18, 18)
+                    .addComponent(btnDevolver))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(btnCancelar))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnBorrar))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBorrar)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,36 +124,26 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
         /*String titulo = txtTitulo.getText();
-        String autor = txtAutor.getText();
-        int anio = Integer.parseInt(txtAnio.getText());
+        String id = txtId.getText();
 
-        if (titulo.isEmpty() || autor.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+        if (!titulo.isEmpty() && !id.isEmpty()) {
+            // Si ambos campos tienen información, muestra el mensaje de devolución exitosa
+            JOptionPane.showMessageDialog(this, "Libro devuelto correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            Libro nuevoLibro = new Libro(titulo, autor, anio);
-
-            if (libro_Controlador != null) {
-                libro_Controlador.guardarLibro(nuevoLibro);
-                System.out.println("Libro agregado exitosamente: " + nuevoLibro);
-
-                JOptionPane.showMessageDialog(this, "El libro ha sido agregado exitosamente.", "Libro agregado", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                System.out.println("Error: El controlador de libro no está disponible.");
-            }
-
-            limpiarCampos();
+            // Si falta información en alguno de los campos, muestra un mensaje de error
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el ID y el título del libro", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        this.limpiarCampos();
 */
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnDevolverActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*
-        this.setVisible(false);
+        /*this.setVisible(false);
         this.limpiarCampos();
         ((Principal) getTopLevelAncestor()).mostrarBotones(true);
-*/
+        */
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -174,15 +152,13 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDevolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtAnio;
-    private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
