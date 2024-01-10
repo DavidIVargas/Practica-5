@@ -12,7 +12,9 @@ import ec.edu.ups.practica_5_mgn.modelo.Biblioteca;
 import ec.edu.ups.practica_5_mgn.vista.libro.ActualizarLibro;
 import ec.edu.ups.practica_5_mgn.vista.libro.AgregarLibro;
 import ec.edu.ups.practica_5_mgn.vista.libro.BuscarLibro;
+import ec.edu.ups.practica_5_mgn.vista.libro.Devolver;
 import ec.edu.ups.practica_5_mgn.vista.libro.EliminarLibro;
+import ec.edu.ups.practica_5_mgn.vista.libro.Prestar;
 import ec.edu.ups.practica_5_mgn.vista.usuario.ActualizarUsuario;
 import ec.edu.ups.practica_5_mgn.vista.usuario.AgregarUsuario;
 import ec.edu.ups.practica_5_mgn.vista.usuario.BuscarUsuario;
@@ -39,6 +41,9 @@ public class Main extends javax.swing.JFrame {
     private BuscarLibro buscarLibro;
     private ActualizarLibro actualizarLibro;
     private EliminarLibro eliminarLibro;
+    //Ventanas Prestar/Devolver
+    private Prestar prestar;
+    private Devolver devolver;
 
     /**
      * Creates new form Main
@@ -184,10 +189,20 @@ public class Main extends javax.swing.JFrame {
 
         mniPrestar_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Prestar.png"))); // NOI18N
         mniPrestar_Libro.setText("Prestar Libro");
+        mniPrestar_Libro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPrestar_LibroActionPerformed(evt);
+            }
+        });
         mnPrestar_Devolver.add(mniPrestar_Libro);
 
         mniDevolver_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Devolver.png"))); // NOI18N
         mniDevolver_Libro.setText("Devolver Libro");
+        mniDevolver_Libro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDevolver_LibroActionPerformed(evt);
+            }
+        });
         mnPrestar_Devolver.add(mniDevolver_Libro);
 
         jMenuBar1.add(mnPrestar_Devolver);
@@ -280,6 +295,22 @@ public class Main extends javax.swing.JFrame {
         }
         eliminarLibro.setVisible(true);
     }//GEN-LAST:event_mniEliminar_LibroActionPerformed
+
+    private void mniPrestar_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPrestar_LibroActionPerformed
+        if (prestar == null){
+            prestar = new Prestar(controladorUsuario, controladorLibro);
+            jPanel1.add(prestar);
+        }
+        prestar.setVisible(true);
+    }//GEN-LAST:event_mniPrestar_LibroActionPerformed
+
+    private void mniDevolver_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDevolver_LibroActionPerformed
+        if(devolver == null){
+            devolver = new Devolver(controladorLibro);
+            jPanel1.add(devolver);
+        }
+        devolver.setVisible(true);
+    }//GEN-LAST:event_mniDevolver_LibroActionPerformed
 
     /**
      * @param args the command line arguments

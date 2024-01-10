@@ -4,17 +4,28 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.libro;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorLibro;
+import ec.edu.ups.practica_5_mgn.controlador.ControladorUsuario;
+import ec.edu.ups.practica_5_mgn.modelo.Libro;
+import ec.edu.ups.practica_5_mgn.vista.usuario.AgregarUsuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class Prestar extends javax.swing.JInternalFrame {
-
+    private ControladorUsuario controladorUsuario;
+    private ControladorLibro controladorLibro;
+    
+    private AgregarUsuario agregarUsuario;
     /**
      * Creates new form Prestar
      */
-    public Prestar() {
+    public Prestar(ControladorUsuario controladorUsuario, ControladorLibro controladorLibro) {
         initComponents();
+        this.controladorUsuario = controladorUsuario;
+        this.controladorLibro = controladorLibro;
     }
 
     /**
@@ -163,12 +174,12 @@ public class Prestar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        /*String id = txtId.getText();
+        String id = txtId.getText();
         String titulo = txtTitulo.getText();
 
         if (!id.isEmpty()) {
-            if (!titulo.isEmpty() && libroControlador != null) {
-                Libro libroEncontrado = libroControlador.buscarLibroPorTitulo(titulo);
+            if (!titulo.isEmpty() && controladorLibro != null) {
+                Libro libroEncontrado = controladorLibro.buscarLibroPorTitulo(titulo);
 
                 if (libroEncontrado != null) {
                     if (libroEncontrado.isDisponible()) {
@@ -185,16 +196,15 @@ public class Prestar extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Ingrese un ID válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
-*/
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnPrestarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarLibroActionPerformed
-       /* String id = txtId.getText();
+       String id = txtId.getText();
         String titulo = txtTitulo.getText();
 
         if (!id.isEmpty()) {
-            if (!titulo.isEmpty() && libroControlador != null) {
-                Libro libroEncontrado = libroControlador.buscarLibroPorTitulo(titulo);
+            if (!titulo.isEmpty() && controladorLibro != null) {
+                Libro libroEncontrado = controladorLibro.buscarLibroPorTitulo(titulo);
 
                 if (libroEncontrado != null) {
                     if (libroEncontrado.isDisponible()) {
@@ -212,21 +222,22 @@ public class Prestar extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Ingrese un ID válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
-*/
     }//GEN-LAST:event_btnPrestarLibroActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*this.setVisible(false);
+        this.setVisible(false);
         this.limpiarCampos();
-        ((Principal) getTopLevelAncestor()).mostrarBotones(true);
-*/
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        //this.limpiarCampos();
+        this.limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-
+    public void limpiarCampos(){
+        this.txtDisponible.setText("");
+        this.txtId.setText("");
+        this.txtTitulo.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;

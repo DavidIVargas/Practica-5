@@ -127,6 +127,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Prestar Libro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPrestar_LibroActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniDevolver_Libro">
               <Properties>
@@ -135,6 +138,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Devolver Libro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniDevolver_LibroActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

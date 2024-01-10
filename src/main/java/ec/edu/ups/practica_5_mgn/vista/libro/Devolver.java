@@ -4,17 +4,22 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.libro;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorLibro;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class Devolver extends javax.swing.JInternalFrame {
+    private ControladorLibro controladorLibro;
 
     /**
      * Creates new form Devolver
      */
-    public Devolver() {
+    public Devolver(ControladorLibro controladorLibro) {
         initComponents();
+        this.controladorLibro = controladorLibro;
     }
 
     /**
@@ -125,31 +130,33 @@ public class Devolver extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
-        /*String titulo = txtTitulo.getText();
-        String id = txtId.getText();
+        String titulo = txtTitulo.getText();
 
-        if (!titulo.isEmpty() && !id.isEmpty()) {
-            // Si ambos campos tienen información, muestra el mensaje de devolución exitosa
-            JOptionPane.showMessageDialog(this, "Libro devuelto correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    if (!titulo.isEmpty()) {
+        boolean devuelto = controladorLibro.devolverLibro(titulo);
+        if (devuelto) {
+            JOptionPane.showMessageDialog(this, "Libro devuelto correctamente y marcado como disponible.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
         } else {
-            // Si falta información en alguno de los campos, muestra un mensaje de error
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese el ID y el título del libro", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El libro no existe o ya está disponible.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        this.limpiarCampos();
-*/
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese el título del libro", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnDevolverActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*this.setVisible(false);
+        this.setVisible(false);
         this.limpiarCampos();
-        ((Principal) getTopLevelAncestor()).mostrarBotones(true);
-        */
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        //this.limpiarCampos();
+        this.limpiarCampos();
     }//GEN-LAST:event_btnBorrarActionPerformed
-
+    public void limpiarCampos(){
+        this.txtId.setText("");
+        this.txtTitulo.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
