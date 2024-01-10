@@ -97,5 +97,8 @@ public class Usuario extends Persona {
                 + ", correo='" + correo + '\''
                 + '}';
     }
+    public ArrayList<Prestamo> obtenerTodosLosPrestamos() {
+        return listaPrestamos;
+    }
 
 }

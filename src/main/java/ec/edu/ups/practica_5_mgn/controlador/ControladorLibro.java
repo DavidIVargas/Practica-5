@@ -77,14 +77,19 @@ public class ControladorLibro {
         }
         return false; // Indica que no se encontró el libro para eliminarlo
     }
+
     public boolean devolverLibro(String titulo) {
-    Libro libroDevuelto = buscarLibroPorTitulo(titulo);
-    if (libroDevuelto != null && !libroDevuelto.isDisponible()) {
-        libroDevuelto.setDisponible(true);
-        System.out.println("Libro devuelto y marcado como disponible: " + libroDevuelto.getTitulo());
-        return true; // Indica que el libro fue devuelto y marcado como disponible
+        Libro libroDevuelto = buscarLibroPorTitulo(titulo);
+        if (libroDevuelto != null && !libroDevuelto.isDisponible()) {
+            libroDevuelto.setDisponible(true);
+            System.out.println("Libro devuelto y marcado como disponible: " + libroDevuelto.getTitulo());
+            return true; // Indica que el libro fue devuelto y marcado como disponible
+        }
+        return false; // Indica que el libro no fue encontrado o ya está disponible
     }
-    return false; // Indica que el libro no fue encontrado o ya está disponible
-}
+
+    public List<Libro> obtenerLibros() {
+        return listaLibros;
+    }
 
 }

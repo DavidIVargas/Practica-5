@@ -86,8 +86,6 @@ public class Main extends javax.swing.JFrame {
         mnPrestar_Devolver = new javax.swing.JMenu();
         mniPrestar_Libro = new javax.swing.JMenuItem();
         mniDevolver_Libro = new javax.swing.JMenuItem();
-        mnInventario = new javax.swing.JMenu();
-        Inventario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -206,15 +204,6 @@ public class Main extends javax.swing.JFrame {
         mnPrestar_Devolver.add(mniDevolver_Libro);
 
         jMenuBar1.add(mnPrestar_Devolver);
-
-        mnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Inventario.png"))); // NOI18N
-        mnInventario.setText("Inventario");
-
-        Inventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Inventario-Lista.png"))); // NOI18N
-        Inventario.setText("Inventario");
-        mnInventario.add(Inventario);
-
-        jMenuBar1.add(mnInventario);
 
         setJMenuBar(jMenuBar1);
 
@@ -348,10 +337,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Inventario;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenu mnInventario;
     private javax.swing.JMenu mnLibro;
     private javax.swing.JMenu mnPrestar_Devolver;
     private javax.swing.JMenu mnUsuario;
