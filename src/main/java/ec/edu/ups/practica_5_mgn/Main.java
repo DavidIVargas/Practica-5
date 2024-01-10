@@ -152,14 +152,29 @@ public class Main extends javax.swing.JFrame {
 
         mniBuscar_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
         mniBuscar_Libro.setText("Buscar Libro");
+        mniBuscar_Libro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniBuscar_LibroActionPerformed(evt);
+            }
+        });
         mnLibro.add(mniBuscar_Libro);
 
         mniActualizar_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         mniActualizar_Libro.setText("Actualizar Libro");
+        mniActualizar_Libro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniActualizar_LibroActionPerformed(evt);
+            }
+        });
         mnLibro.add(mniActualizar_Libro);
 
         mniEliminar_Libro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Eliminar.png"))); // NOI18N
         mniEliminar_Libro.setText("Eliminar Libro");
+        mniEliminar_Libro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEliminar_LibroActionPerformed(evt);
+            }
+        });
         mnLibro.add(mniEliminar_Libro);
 
         jMenuBar1.add(mnLibro);
@@ -236,10 +251,35 @@ public class Main extends javax.swing.JFrame {
 
     private void mniAgregar_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAgregar_LibroActionPerformed
         if(agregarLibro == null){
-            agregarLibro = new AgregarLibro();
+            agregarLibro = new AgregarLibro(controladorLibro);
+            jPanel1.add(agregarLibro);
         }
         agregarLibro.setVisible(true);
     }//GEN-LAST:event_mniAgregar_LibroActionPerformed
+
+    private void mniBuscar_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniBuscar_LibroActionPerformed
+        if(buscarLibro == null){
+            buscarLibro = new BuscarLibro(controladorLibro);
+            jPanel1.add(buscarLibro);
+        }
+        buscarLibro.setVisible(true);
+    }//GEN-LAST:event_mniBuscar_LibroActionPerformed
+
+    private void mniActualizar_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniActualizar_LibroActionPerformed
+        if (actualizarLibro == null){
+            actualizarLibro = new ActualizarLibro(controladorLibro);
+            jPanel1.add(actualizarLibro);
+        }
+        actualizarLibro.setVisible(true);
+    }//GEN-LAST:event_mniActualizar_LibroActionPerformed
+
+    private void mniEliminar_LibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEliminar_LibroActionPerformed
+        if (eliminarLibro == null){
+            eliminarLibro = new EliminarLibro(controladorLibro);
+            jPanel1.add(eliminarLibro);
+        }
+        eliminarLibro.setVisible(true);
+    }//GEN-LAST:event_mniEliminar_LibroActionPerformed
 
     /**
      * @param args the command line arguments

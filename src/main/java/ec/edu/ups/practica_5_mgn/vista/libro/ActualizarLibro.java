@@ -4,17 +4,24 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.libro;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorLibro;
+import ec.edu.ups.practica_5_mgn.modelo.Libro;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class ActualizarLibro extends javax.swing.JInternalFrame {
 
+    private ControladorLibro controladorLibro;
+
     /**
      * Creates new form ActualizarLibro
      */
-    public ActualizarLibro() {
+    public ActualizarLibro(ControladorLibro controladorLibro) {
         initComponents();
+        this.controladorLibro = controladorLibro;
     }
 
     /**
@@ -44,6 +51,23 @@ public class ActualizarLibro extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actualizar Libro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 12))); // NOI18N
@@ -51,10 +75,8 @@ public class ActualizarLibro extends javax.swing.JInternalFrame {
         txtTitulo.setToolTipText("Ingrese el titulo del libro a buscar");
 
         txtAutor.setToolTipText("Ingrese el Autor del libro a buscar");
-        txtAutor.setEnabled(false);
 
         txtAnio.setToolTipText("Ingrese el año del libro a buscar");
-        txtAnio.setEnabled(false);
 
         txtDisponible.setEnabled(false);
 
@@ -166,21 +188,67 @@ public class ActualizarLibro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //
+        String titulo = txtTitulo.getText();
+
+        if (!titulo.isEmpty() && controladorLibro != null) {
+            Libro libroEncontrado = controladorLibro.buscarLibroPorTitulo(titulo);
+
+            if (libroEncontrado != null) {
+                txtTitulo.setEnabled(false); // Deshabilitar el campo de título
+                txtAutor.setEnabled(true); // Habilitar la edición del autor
+                txtAnio.setEnabled(true); // Habilitar la edición del año
+
+                // Mostrar los datos del libro
+                txtAutor.setText(libroEncontrado.getAutor());
+                txtAnio.setText(String.valueOf(libroEncontrado.getAño()));
+                txtDisponible.setText(libroEncontrado.isDisponible() ? "Disponible" : "No Disponible");
+            } else {
+                JOptionPane.showMessageDialog(this, "El libro no existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        //
+        this.setVisible(false);
+        this.limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        //
+        this.limpiarCampos();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        String titulo = txtTitulo.getText();
+        String autorActualizado = txtAutor.getText();
+        int anioActualizado = Integer.parseInt(txtAnio.getText());
+
+        if (!titulo.isEmpty()) {
+            Libro libroEncontrado = controladorLibro.buscarLibroPorTitulo(titulo);
+
+            if (libroEncontrado != null) {
+                // Solo se actualizan Autor y Año
+                libroEncontrado.setAutor(autorActualizado);
+                libroEncontrado.setAño(anioActualizado);
+
+                JOptionPane.showMessageDialog(this, "Libro actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al encontrar el libro.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, busque un libro para actualizar.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        this.setVisible(false);
+        this.limpiarCampos();
+    }//GEN-LAST:event_formInternalFrameClosing
+    public void limpiarCampos() {
+        this.txtAnio.setText("");
+        this.txtAutor.setText("");
+        this.txtDisponible.setText("");
+        this.txtTitulo.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

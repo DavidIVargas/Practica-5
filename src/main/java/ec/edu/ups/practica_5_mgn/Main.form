@@ -84,6 +84,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Libro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniBuscar_LibroActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniActualizar_Libro">
               <Properties>
@@ -92,6 +95,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Actualizar Libro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniActualizar_LibroActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniEliminar_Libro">
               <Properties>
@@ -100,6 +106,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Libro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniEliminar_LibroActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

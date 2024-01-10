@@ -4,18 +4,23 @@
  */
 package ec.edu.ups.practica_5_mgn.vista.libro;
 
+import ec.edu.ups.practica_5_mgn.controlador.ControladorLibro;
+import ec.edu.ups.practica_5_mgn.modelo.Libro;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidvargas
  */
 public class AgregarLibro extends javax.swing.JInternalFrame {
-    
+    private ControladorLibro controladorLibro;
 
     /**
      * Creates new form AgregarLibro
      */
-    public AgregarLibro() {
+    public AgregarLibro(ControladorLibro controladorLibro)   {
         initComponents();
+        this.controladorLibro = controladorLibro;
     }
 
     /**
@@ -137,7 +142,7 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        /*String titulo = txtTitulo.getText();
+        String titulo = txtTitulo.getText();
         String autor = txtAutor.getText();
         int anio = Integer.parseInt(txtAnio.getText());
 
@@ -146,8 +151,8 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
         } else {
             Libro nuevoLibro = new Libro(titulo, autor, anio);
 
-            if (libro_Controlador != null) {
-                libro_Controlador.guardarLibro(nuevoLibro);
+            if (controladorLibro != null) {
+                controladorLibro.guardarLibro(nuevoLibro);
                 System.out.println("Libro agregado exitosamente: " + nuevoLibro);
 
                 JOptionPane.showMessageDialog(this, "El libro ha sido agregado exitosamente.", "Libro agregado", JOptionPane.INFORMATION_MESSAGE);
@@ -157,22 +162,23 @@ public class AgregarLibro extends javax.swing.JInternalFrame {
 
             limpiarCampos();
         }
-*/
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*
+        
         this.setVisible(false);
         this.limpiarCampos();
-        ((Principal) getTopLevelAncestor()).mostrarBotones(true);
-*/
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        //this.limpiarCampos();
+        this.limpiarCampos();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
-
+    private void limpiarCampos(){
+        this.txtAnio.setText("");
+        this.txtAutor.setText("");
+        this.txtTitulo.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrar;
